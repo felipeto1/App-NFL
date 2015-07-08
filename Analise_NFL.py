@@ -200,30 +200,18 @@ for pololo in Times:
             dist=int(muutime[2])-int(i[0][0][0][6])
             i[1]+=dist # difereças de rankiamento
                            
-    analise=[]            
+    analise=[]   
+    vitorias=0         
     for i in tudo:
         if len(i[0])!=0:
             if len(i[0])==2:
                 analise.append([i[0][0][0][0],i[1]])
             else:
                 analise.append([i[0][0][0][0],i[1]])
-                
-    vitorias=0
-    derrotas=0    
-    empates=0    
-    for i in predição:    
-        if len(i)!=1:        
-            i.pop()
-    for i in predição:    
-        if i[1]<0:        
-            i.append("W")  
+    for i in analise:
+        if i[1]<0:
             vitorias+=1
-        if i[1]>0:        
-            i.append("L")
-            derrotas+=1
-        if i[1]==0:
-            i.append("T")
-            empates+=1
+
     quantasW=vitorias #quantas vitórias são necessárias para ir para os playoffs
     numeros=[]
     wins=[]
@@ -278,10 +266,31 @@ for pololo in Times:
         if len(i)==2:
             quebonito.append([i[0][0],i[1]]) #AQUI TÃO AS W E L
         else:
-            quebonito.append("BYE WEEK")  
-            
-    listaenorme.append([timeusuario,predição,vitorias,derrotas,empates,quebonito])
+            quebonito.append("BYE WEEK") 
+
+    vitorias=0
+    derrotas=0
+    empates=0
     
+    for i in predição:
+        if len(i)!=1:
+            i.pop()
+    for i in predição:
+        if i[1]<0:
+            i.append("W")
+            vitorias+=1
+        if i[1]>0:
+            i.append("L")
+            derrotas+=1
+        if i[1]==0:
+            i.append("T")
+            empates+=1
+            
+    listaenorme.append([timeusuario,predição,vitorias,derrotas,empates,quebonito,quantasW])
+
+AgendasRivais=[]
+for i in listaenorme:
+    AgendasRivais.append([i[0],i[5]])
 for i in PredS:
     for k in i:
         if k == i[1]:
@@ -465,6 +474,7 @@ for i in range(1):
                     littlechampsafc2.remove(max(littlechampsafc2))
                     break
                 mae+=1
+                
     for u in champsafc2:
         if u not in listinha:
             listinha.append(u)
@@ -656,14 +666,17 @@ for i in range(1):
     mae=0
     trocou=0
     listinha=[]
-    while mae<4:
-        for l in range(0,len(champsafc)-1):
+    while mae<10000:
+        for l in range(0,len(champsafc)):
             if len(listinha)<4:
                 if (champsafc[l][1]==max(littlechampsafc) and champsafc[l] not in listinha):
                     listinha.append(champsafc[l])
                     littlechampsafc.remove(max(littlechampsafc))
                     break
-                mae+=1
+                mae+=1 
+            if len(listinha)==4:
+                mae+=404040404
+    print(listinha)
     for u in champsafc:
         if u not in listinha:
             listinha.append(u)
@@ -694,14 +707,16 @@ for i in range(1):
     mae=0
     trocou=0
     listinha=[]
-    while mae<4:
-        for l in range(0,len(champsnfc)-1):
+    while mae<1000:
+        for l in range(0,len(champsnfc)):
             if len(listinha)<4:
                 if (champsnfc[l][1]==max(littlechampsnfc) and champsnfc[l] not in listinha):
                     listinha.append(champsnfc[l])
                     littlechampsnfc.remove(max(littlechampsnfc))
                     break
                 mae+=1
+            if len(listinha)==4:
+                mae+=404040404
     for u in champsnfc:
         if u not in listinha:
             listinha.append(u)
@@ -823,193 +838,74 @@ for i in nfc:
 for i in afc:
     for k in i:
         Afc.append(k)
-versus=[]
-timeusuario=["Green Bay Packers"] # escolha do time
-for i in Agendas:
-    if i[0]==timeusuario:
-        for k in i:
-            if k!=i[0] and k!=i[2]: # análise do time
-                versus.append(k) # salva os times que irão enfrentar o time escolhido nessa lista
-meutime=[]
-for i in Times:
-    if timeusuario[0]==i[0][0]: #salva as informações importantes do time escolhido
-        meutime.append([i[0][2],i[0][3],i[0][6],i[1][0]])
-        
-for i in Standings2:
-    if i[0]==[meutime[0][0],meutime[0][1]]:
-        for k in i[1]:
-            if k[0]==timeusuario[0]:
-                meutime.append([int(k[1]),int(k[2]),int(k[3])])
-for i in PredS:
-    if i[0]==[meutime[0][0],meutime[0][1]]:
-        for k in i[1]:
-            if k[0]==timeusuario[0]:
-                meutime.append([int(k[1]),int(k[2]),int(k[3])])                
-                
-passei=0
-wildcard=0
-if meutime[0][0]=="NFC":
-    for i in nfc:
-        if i == nfc[0]:
-            for k in i:
-                if k[0]==timeusuario[0]:
-                    passei=1
-        if i == nfc[1]:
-            for l in i:
-                if l==i[0] or l==i[0]:
-                    if l[0]==timeusuario[0]:
-                        wildcard=1
-if meutime[0][0]=="AFC":
-    for i in afc:
-        if i == afc[0]:
-            for k in i:
-                if k[0]==timeusuario[0]:
-                    passei=1
-        if i == afc[1]:
-            for l in i:
-                if l==i[0] or l==i[0]:
-                    if l[0]==timeusuario[0]:
-                        wildcard=1
-                        
-semana=meutime[1][0]+meutime[1][1]+meutime[1][2]
-ameaça=['Detroit Lions']
-for i in Vitorias:
-    for k in range(len(i[1])):
-        if k==i[1][0]:
-            i.append
-#if passei==1:
-#    for i in Standings2:
-#        
-        
-tudo=[]              
-for i in versus[0]: #analisa a agend do time e cria uma lista com as informaçoes importantes de cada time q o time escolhido enfrentará
-    lista=[]
-    if '@' in i:
-        po=i.split("@")
-        for l in Times:
-            if po[1]==l[0][1]:
-                lista.append(l)
-                lista.append('@')
-    else:
-        for j in Times:
-            if i==j[0][1]:
-                lista.append(j)
-    tudo.append([lista,int(0)])
-if len(tudo)==18:
-    tudo.pop()
-for i in tudo:
-    for k in Vitorias:
-        if len(i[0])!=0:
-            if k[0]==timeusuario[0]:
-                for g in k:
-                    if g == k[1]:
-                        for b in range(len(g)):
-                            #print(k[0],g[b])
-                            if (g[b]=="W" and len(tudo[b])==2):
-                                tudo[b].append("W")
-                            if (g[b]=="L" and len(tudo[b])==2):
-                                tudo[b].append("L")
-                            if (g[b]=="T" and len(tudo[b])==2):
-                                tudo[b].append("T")
-                        
-                    
-for i in tudo: #sistema de pontuação
-    if len(i[0])==2: 
-        i[1]+=int(i[0][0][1][0]) # jogos fora de casa, somam pontuação
-    if len(i[0])==1:
-        i[1]-=int(meutime[0][3]) #jogos em casa subtrai pontuação
-    if len(i[0])!=0:
-     #   if i[0][0][0][2]==meutime[0][0]: #se for da mesma conferencia/
-      #      i[1]-=2
-       # if (i[0][0][0][3]==meutime[0][1] and i[0][0][0][2]==meutime[0][0]):
-        #    i[1]-=5 # se for da mesma divisão
-        dist=int(meutime[0][2])-int(i[0][0][0][6])
-        i[1]+=dist # difereças de rankiamento
-                       
-analise=[]            
-for i in tudo:
-    if len(i[0])!=0:
-        if len(i[0])==2:
-            analise.append([i[0][0][0][0],i[1],len(i)])
-        else:
-            analise.append([i[0][0][0][0],i[1],len(i)])
-            
-quantasvit=2 #quantas vitórias são necessárias para ir para os playoffs
-numeros=[]
-wins=[]
-for i in analise:
-    numeros.append(i[1])
-while len(numeros)>0:
-    for k in analise:
-        if float(k[1])==min(numeros):
-            wins.append(k)
-            #print(k)
-            numeros.remove(float(k[1]))
-            analise.remove(k)
-            break
-    
-predição=[]
-predição=wins
-conta=0
-for k in wins:
-    if conta<quantasvit:
-        if len(k[0])!=0:
-            if (k[2]!=3): 
-                k.append("W")    
-                conta+=1
-    
-for i in range(len(wins)):
-    if (wins[i][2]==2 and len(wins[i])!=4):
-        wins[i].append("L")
 
+VaiFazer=[]
+for vb in Times:
+    pequenina=[]
+    for bv in vb[0]:
+        if bv==vb[0][0]:
+            ameaça=[bv]
+            semana=0
+            pequenina.append(bv)
+            for i in Vitorias:
+                minhasvit=0
+                meusties=0
+                minhaslos=0
+                bye=0
+                i.append([minhasvit,minhaslos,meusties,bye])
+                for k in range(len(i[1])):
+                    if i[1][k]=='W':
+                        minhasvit+=1
+                        i.append([minhasvit,minhaslos,meusties,bye])
+                    if i[1][k]=='L':
+                        minhaslos+=1
+                        i.append([minhasvit,minhaslos,meusties,bye])
+                    if i[1][k]=='T':
+                        meusties+=1
+                        i.append([minhasvit,minhaslos,meusties,bye])
+                    if i[1][k]=='0':
+                        i.append([minhasvit,minhaslos,meusties,bye])
+                    if i[1][k]=='B':
+                        bye+=1
+                        i.append([minhasvit,minhaslos,meusties,bye])
+                        
+            for k in Vitorias[0][1]:
+                if k=='W':
+                    semana+=1
+                if k=='L':
+                    semana+=1
+                if k=='T':
+                    semana+=1
+                if k=='B':
+                    semana+=1
+                        
+            for i in Times:
+                if ameaça[0]==i[0][0]: #salva as informações importantes do time escolhido
+                    ameaça.append([i[0][2],i[0][3],i[0][6],i[1][0]])
+                    
+            for i in Standings2:
+                if i[0]==[ameaça[1][0],ameaça[1][1]]:
+                    for k in i[1]:
+                        if k[0]==ameaça[0]:
+                            ameaça.append([int(k[1]),int(k[2]),int(k[3])])
+            for i in PredS:
+                if i[0]==[ameaça[1][0],ameaça[1][1]]:
+                    for k in i[1]:
+                        if k[0]==ameaça[0]:
+                            ameaça.append([int(k[1]),int(k[2]),int(k[3])])                
                             
-for i in tudo:
-    if len(i[0])!=0:
-        if len(i[0])==2:
-            for k in wins:
-                if (k[1]==i[1] and k[0]==i[0][0][0][0]):
-                    k[0]="@"+k[0]
-              
-for i in wins:
-    if len(i)==3:
-        for k in tudo:
-            if len(k)==3:
-                if k[0][0][0][0]==i[0]:
-                    i.append(k[2])
-                if k[0][0][0][0]!=i[0]:
-                    if i[0]=="@"+k[0][0][0][0]:
-                        i.append(k[2])
-umalista=[]
-for i in tudo:
-    momo=[]
-    lololo=None
-    if len(i[0])!=0:
-        if len(i[0])==2:
-            lololo="@"+i[0][0][0][0]
-        if len(i[0])==1:
-            lololo=i[0][0][0][0]
-        #if len(i)==2:    
-        momo.append([lololo])
-        #if len(i)==3:    
-            #momo.append([lololo,i[2]])
-    else:
-        momo.append("BYE WEEK")
-    umalista.append(momo)
+            quantodeveria=0
+            for i in Vitorias:
+                if i[0]==ameaça[0]:
+                    quantodeveria=i[semana+2][0]
+            quantofiz=ameaça[2][0]
+            vaifazer=ameaça[3][0]-(quantodeveria-quantofiz)
+            pequenina.append(vaifazer)
+            pequenina.append([ameaça[3][0],quantodeveria,quantofiz])
+    VaiFazer.append(pequenina)
         
-for i in range(len(umalista)):
-    for k in wins:
-        if umalista[i][0][0]==k[0]:
-            umalista[i].append(k[3])
-   
-quebonito=[]         
-for i in umalista:
-    if len(i)==2:
-        quebonito.append([i[0][0],i[1]]) #AQUI TÃO AS W E L
-    else:
-        quebonito.append("BYE WEEK")
-        
-for i in quebonito:
-    print(i)
+#for i in quebonito:
+#    print(i)
 
 
         

@@ -1,40 +1,40 @@
 AFC,W
-Denver Broncos,2,1,0
-Kansas City Chiefs,3,0,0
-Oakland Raiders,0,3,0
-San Diego Chargers,2,1,1
+Denver Broncos,5,2,0
+Kansas City Chiefs,4,2,1
+Oakland Raiders,1,6,0
+San Diego Chargers,4,3,0
 AFC,S
-Houston Texans,5,0,0
-Indianapolis Colts,3,1,1
-Jacksonville Jaguars,4,0,1
-Tennessee Titans,1,4,0
+Houston Texans,3,4,0
+Indianapolis Colts,7,0,0
+Jacksonville Jaguars,0,7,0
+Tennessee Titans,0,6,1
 AFC,N
-Baltimore Ravens,1,4,0
-Cincinnati Bengals,3,2,0
-Cleveland Browns,2,3,0
-Pittsburgh Steelers,3,0,2
+Baltimore Ravens,4,3,0
+Cincinnati Bengals,4,3,0
+Cleveland Browns,5,1,1
+Pittsburgh Steelers,6,0,1
 AFC,E
-Bufallo Bills,0,0,0
-Miami Dolphins,0,0,0
-New England Patriots,0,0,0
-New York Jets,0,0,0
+Buffalo Bills,4,0,3
+Miami Dolphins,2,3,2
+New England Patriots,7,0,0
+New York Jets,5,2,0
 NFC,W
-Arizona Cardinals,4,0,1
-San Francisco 49ers,3,1,1
-Seattle Seahawks,7,0,0
-St. Louis Rams,4,1,0
+Arizona Cardinals,4,3,0
+San Francisco 49ers,5,2,0
+Seattle Seahawks,6,1,0
+St. Louis Rams,3,4,0
 NFC,S
-Atlanta Falcons,4,0,1
-Carolina Panthers,6,1,0
-New Orleans Saints,2,3,0
-Tampa Bay Buccaneers,0,5,0
+Atlanta Falcons,1,5,1
+Carolina Panthers,2,5,0
+New Orleans Saints,3,4,0
+Tampa Bay Buccaneers,0,7,0
 NFC,N
-Chicago Bears,1,4,0
-Detroit Lions,1,4,0
-Green Bay Packers,5,2,0
-Minnesota Vikings,0,5,0
+Chicago Bears,1,6,0
+Detroit Lions,5,2,0
+Green Bay Packers,7,0,0
+Minnesota Vikings,0,7,0
 NFC,E
-Dallas Cowboys,2,0,3
-Philadelphia Eagles,3,0,2
-Washington Redskins,4,0,1
-New York Giants,4,1,1
+Dallas Cowboys,4,3,0
+Philadelphia Eagles,4,2,1
+Washington Redskins,2,4,1
+New York Giants,3,4,0
